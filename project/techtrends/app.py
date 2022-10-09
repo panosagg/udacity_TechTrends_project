@@ -1,4 +1,5 @@
 """Imports"""
+import datetime
 import logging
 import sqlite3
 
@@ -84,10 +85,15 @@ def index():
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
+    now = datetime.datetime.now()
+    timestamp = str(now.strftime("%d/%m/%Y, %H:%M:%S, "))
     if post is None:
+      """Log message for a non-existing article"""
+      app.logger.info(timestamp + 'This Article does not exist')
       return render_template('404.html'), 404
     else:
-      app.logger.info('The Article Post "' + post[2] + '" was successfully retrieved')
+      """Log message for a non-existing article"""
+      app.logger.info(timestamp + 'The Article Post "' + post[2] + '" was successfully retrieved')
       """call function to get total ammount of db connections"""
       count_db_connections()
       return render_template('post.html', post=post)
@@ -95,8 +101,9 @@ def post(post_id):
 # Define the About Us page
 @app.route('/about')
 def about():
-    app.logger.info('The "About Us" page was successfully is retrieved.')
-    #app.logger.debug('DEBUG message')
+    now = datetime.datetime.now()
+    timestamp = str(now.strftime("%d/%m/%Y, %H:%M:%S, "))
+    app.logger.info(timestamp + 'The "About Us" page was successfully retrieved')
     return render_template('about.html')
 
 # Define the post creation functionality 
@@ -114,7 +121,11 @@ def create():
                          (title, content))
             connection.commit()
             connection.close()
-
+            now = datetime.datetime.now()
+            timestamp = str(now.strftime("%d/%m/%Y, %H:%M:%S, "))
+            app.logger.info(timestamp + 'The Article Post with title "' + str(title) + ' " was successfully created')
+            """call function to get total ammount of db connections"""
+            count_db_connections()
             return redirect(url_for('index'))
 
     return render_template('create.html')
@@ -124,8 +135,6 @@ if __name__ == "__main__":
 
    # Log to STDOUT with the format e.g. INFO:werkzeug:127.0.0.1 - - [08/Jan/2021 22:40:06] "GET /metrics HTTP/1.1" 200 -
    logging.basicConfig(format='%(levelname)s:%(name)s %(message)s',level=logging.INFO,datefmt='%Y-%m-%d %H:%M:%S')
-   
-   # Capture any Python logs at the DEBUG level.
    logging.basicConfig(format='%(levelname)s:%(name)s %(message)s',level=logging.DEBUG,datefmt='%Y-%m-%d %H:%M:%S')
    
    app.run(host='0.0.0.0', port='3111')
