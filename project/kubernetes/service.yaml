@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+  name: techtrends
+  namespace: sandbox
+spec:
+  ports:
+  - port: 4111
+    protocol: TCP
+    targetPort: 3111
+  selector:  
+  type: ClusterIP
