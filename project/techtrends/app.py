@@ -66,7 +66,7 @@ def healthz():
     ## log line
     """Log message for a non-existing article"""
     time()
-    app.logger.info(timestamp + 'Status request successfull')
+    app.logger.info(timestamp + '"Healthz" request successfull')
     return response  
 
 @app.route('/metrics')
@@ -79,7 +79,7 @@ def metrics():
             mimetype='application/json'
     )
     time()
-    app.logger.info(timestamp + 'Metrics request successfull')
+    app.logger.info(timestamp + '"Metrics" request successfull')
     return response 
 
     
@@ -99,11 +99,11 @@ def post(post_id):
     time()
     if post is None:
       """Log message for a non-existing article"""
-      app.logger.info(timestamp + 'This Article does not exist')
+      app.logger.info(timestamp + 'This Article does not exist!')
       return render_template('404.html'), 404
     else:
       """Log message for a non-existing article"""
-      app.logger.info(timestamp + 'The Article Post "' + post[2] + '" was successfully retrieved')
+      app.logger.info(timestamp + 'Article "' + post[2] + '" retrieved!')
       """call function to get total ammount of db connections"""
       count_db_connections()
       return render_template('post.html', post=post)
@@ -112,7 +112,7 @@ def post(post_id):
 @app.route('/about')
 def about():
     time()
-    app.logger.info(timestamp + 'The "About Us" page was successfully retrieved')
+    app.logger.info(timestamp + '"About Us" page retrieved!')
     return render_template('about.html')
 
 # Define the post creation functionality 
