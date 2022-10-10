@@ -41,6 +41,14 @@ def number_of_posts():
     print(total_posts[0])
     return total_posts
 
+# Get also date/time in format Y/M/D/, H:M:S apart from datefmt='%Y-%m-%d %H:%M:%S'
+# e.g. INFO:app 10/10/2022, 10:28:39, Status request successfull
+def time():
+    global timestamp
+    now = datetime.datetime.now()
+    timestamp = str(now.strftime("%d/%m/%Y, %H:%M:%S, "))
+    return timestamp
+
 # Define the Flask application
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
@@ -49,8 +57,6 @@ app.config['SECRET_KEY'] = 'your secret key'
 @app.route('/healthz')
 def healthz():
     """Get Health""" 
-    now = datetime.datetime.now()
-    timestamp = str(now.strftime("%d/%m/%Y, %H:%M:%S, "))
     response = app.response_class(
             response=json.dumps({"result":"OK - healthy"}),
             status=200,
@@ -59,6 +65,7 @@ def healthz():
 
     ## log line
     """Log message for a non-existing article"""
+    time()
     app.logger.info(timestamp + 'Status request successfull')
     return response  
 
@@ -71,7 +78,8 @@ def metrics():
             status=200,
             mimetype='application/json'
     )
-    
+    time()
+    app.logger.info(timestamp + 'Metrics request successfull')
     return response 
 
     
@@ -88,8 +96,7 @@ def index():
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
-    now = datetime.datetime.now()
-    timestamp = str(now.strftime("%d/%m/%Y, %H:%M:%S, "))
+    time()
     if post is None:
       """Log message for a non-existing article"""
       app.logger.info(timestamp + 'This Article does not exist')
@@ -104,14 +111,14 @@ def post(post_id):
 # Define the About Us page
 @app.route('/about')
 def about():
-    now = datetime.datetime.now()
-    timestamp = str(now.strftime("%d/%m/%Y, %H:%M:%S, "))
+    time()
     app.logger.info(timestamp + 'The "About Us" page was successfully retrieved')
     return render_template('about.html')
 
 # Define the post creation functionality 
 @app.route('/create', methods=('GET', 'POST'))
 def create():
+    time()
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
@@ -124,8 +131,6 @@ def create():
                          (title, content))
             connection.commit()
             connection.close()
-            now = datetime.datetime.now()
-            timestamp = str(now.strftime("%d/%m/%Y, %H:%M:%S, "))
             app.logger.info(timestamp + 'The Article Post with title "' + str(title) + ' " was successfully created')
             """call function to get total ammount of db connections"""
             count_db_connections()
