@@ -19,7 +19,6 @@ spec:
       - image: panosagg/{{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagepullPolicy: {{ .Values.image.PullPolicy }}
         name: techtrends
-        resources: {{ toYaml .Values.resources | indent 12 }}
         ports:
         - containerPort: {{ .Values.containerPort }}
         livenessProbe:
@@ -30,4 +29,6 @@ spec:
            httpGet:
             path: {{ .Values.readinessProbe.path }}
             port: {{ .Values.containerPort }}
+        resources:
+{{ toYaml .Values.resources | indent 12 }}
             
