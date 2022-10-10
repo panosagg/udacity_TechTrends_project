@@ -49,6 +49,8 @@ app.config['SECRET_KEY'] = 'your secret key'
 @app.route('/healthz')
 def healthz():
     """Get Health""" 
+    now = datetime.datetime.now()
+    timestamp = str(now.strftime("%d/%m/%Y, %H:%M:%S, "))
     response = app.response_class(
             response=json.dumps({"result":"OK - healthy"}),
             status=200,
@@ -56,7 +58,8 @@ def healthz():
     )
 
     ## log line
-    app.logger.info('Status request successfull')
+    """Log message for a non-existing article"""
+    app.logger.info(timestamp + 'Status request successfull')
     return response  
 
 @app.route('/metrics')
