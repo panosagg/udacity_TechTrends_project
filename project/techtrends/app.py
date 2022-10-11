@@ -102,8 +102,7 @@ def post(post_id):
     time()
     if post is None:
       """Log message for a non-existing article"""
-      app.logger.info(timestamp + 'This Article does not exist!')
-      app.logger.error(timestamp + 'Non-existing Article debug message')
+      app.logger.error(timestamp + 'Non-existing Article!')
       return render_template('404.html'), 404
     else:
       """Log message for a non-existing article"""

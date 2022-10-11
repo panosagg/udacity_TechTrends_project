@@ -4,13 +4,13 @@ docker build -t techtrends .
 ## Docker commands used to run the application
 docker run -d -p 7111:3111 techtrends
 
-0b91b29840d8e4784a6b32d255c92c6160d93199d8cce31966ef749a944d75f2 ---> Container ID
+36d403903fab9b86559b6fe454fb827bcf677714fb1618d877c072f4fb7eac07 ---> Container ID
 
 ## Docker commands used to get the application logs
-docker logs 0b91b29840d8e4784a6b32d255c92c6160d93199d8cce31966ef749a944d75f2
+docker logs 36d403903fab9b86559b6fe454fb827bcf677714fb1618d877c072f4fb7eac07
 
 ## Logs from the container running the TechTrends application
-docker logs -f 0b91b29840d8e4784a6b32d255c92c6160d93199d8cce31966ef749a944d75f2
+docker logs -f 36d403903fab9b86559b6fe454fb827bcf677714fb1618d877c072f4fb7eac07
  * Serving Flask app 'app' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
@@ -19,33 +19,28 @@ docker logs -f 0b91b29840d8e4784a6b32d255c92c6160d93199d8cce31966ef749a944d75f2
 WARNING:werkzeug  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
 INFO:werkzeug  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:07] "GET / HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:07] "GET /static/css/main.css HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:07] "GET /favicon.ico HTTP/1.1" 404 -
-INFO:app 10/10/2022, 07:36:12, Metrics request successfull
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:12] "GET /metrics HTTP/1.1" 200 -
-INFO:app 10/10/2022, 07:36:17, Status request successfull
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:17] "GET /healthz HTTP/1.1" 200 -
-INFO:app 10/10/2022, 07:36:21, The Article Post "2020 CNCF Annual Report" was successfully retrieved
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:21] "GET /1 HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:21] "GET /static/css/main.css HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:23] "GET / HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:23] "GET /static/css/main.css HTTP/1.1" 304 -
-INFO:app 10/10/2022, 07:36:25, The Article Post "Kubernetes Certification" was successfully retrieved
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:25] "GET /6 HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:25] "GET /static/css/main.css HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:28] "GET / HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:28] "GET /static/css/main.css HTTP/1.1" 304 -
-INFO:app 10/10/2022, 07:36:30, Metrics request successfull
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:30] "GET /metrics HTTP/1.1" 200 -
-INFO:app 10/10/2022, 07:36:32, The "About Us" page was successfully retrieved
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:32] "GET /about HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:32] "GET /static/css/main.css HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:32] "GET /favicon.ico HTTP/1.1" 404 -
-INFO:app 10/10/2022, 07:36:37, Status request successfull
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:37] "GET /healthz HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:39] "GET / HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:39] "GET /static/css/main.css HTTP/1.1" 200 -
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:36:39] "GET /favicon.ico HTTP/1.1" 404 -
-INFO:app 10/10/2022, 07:37:58, Metrics request successfull
-INFO:werkzeug 172.17.0.1 - - [10/Oct/2022 07:37:58] "GET /metrics HTTP/1.1" 200 -
+INFO:app 11/10/2022, 16:16:49, "Main Page" request successfull							------------> Main page retrieved 
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:16:49] "GET / HTTP/1.1" 200 -
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:16:49] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:app 11/10/2022, 16:17:09, "Metrics" request successfull							------------> Metrics successfull retrieved
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:17:09] "GET /metrics HTTP/1.1" 200 -
+INFO:app 11/10/2022, 16:17:23, "Healthz" request successfull							------------> Healthz successfull retrieved
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:17:23] "GET /healthz HTTP/1.1" 200 -
+INFO:app 11/10/2022, 16:17:33, Article "2020 CNCF Annual Report" retrieved!				------------> The specific Article retrieved
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:17:33] "GET /1 HTTP/1.1" 200 -
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:17:33] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:app 11/10/2022, 16:17:44, "About Us" page retrieved!								------------> "About page" retrieved
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:17:44] "GET /about HTTP/1.1" 200 -
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:17:44] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:17:50] "GET /create HTTP/1.1" 200 -
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:17:50] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:app 11/10/2022, 16:18:01, The Article Post with title "test2_post " was successfully created		------------> NEW post created
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:18:01] "POST /create HTTP/1.1" 302 -
+INFO:app 11/10/2022, 16:18:01, "Main Page" request successfull
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:18:01] "GET / HTTP/1.1" 200 -
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:18:01] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:app 11/10/2022, 16:18:10, "Metrics" request successfull
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:18:10] "GET /metrics HTTP/1.1" 200 -
+ERROR:app 11/10/2022, 16:18:32, Non-existing Article!								------------> ERROR for non-existing article				
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:18:32] "GET /4242 HTTP/1.1" 404 -
+INFO:werkzeug 172.17.0.1 - - [11/Oct/2022 16:18:33] "GET /static/css/main.css HTTP/1.1" 304 -
