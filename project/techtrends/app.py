@@ -6,8 +6,7 @@ import sqlite3
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
-#global db_connection_count
-#db_connection_count=0
+db_connection_count=0
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
@@ -16,7 +15,6 @@ def get_db_connection():
     connection.row_factory = sqlite3.Row
     return connection
 
-db_connection_count=0
 # Get the total amount of connections to the database. For example, accessing an article will query the database, hence will count as a connection. 
 def count_db_connections(): 
     global db_connection_count
@@ -72,7 +70,7 @@ def healthz():
 
 @app.route('/metrics')
 def metrics():
-    #global total_posts
+    global total_posts
     number_of_posts()
     response = app.response_class(
             response=json.dumps({"db_connection_count": db_connection_count , "posts_count": total_posts[0]}),
@@ -105,7 +103,7 @@ def post(post_id):
     if post is None:
       """Log message for a non-existing article"""
       app.logger.info(timestamp + 'This Article does not exist!')
-      app.logger.debug('Non-existing Article debug message')
+      app.logger.error(timestamp + 'Non-existing Article debug message')
       return render_template('404.html'), 404
     else:
       """Log message for a non-existing article"""
@@ -153,6 +151,7 @@ if __name__ == "__main__":
    # Log to STDOUT with the format e.g. INFO:werkzeug:127.0.0.1 - - [08/Jan/2021 22:40:06] "GET /metrics HTTP/1.1" 200 -
    logging.basicConfig(format='%(levelname)s:%(name)s %(message)s',level=logging.INFO,datefmt='%Y-%m-%d %H:%M:%S')
    logging.basicConfig(format='%(levelname)s:%(name)s %(message)s',level=logging.DEBUG,datefmt='%Y-%m-%d %H:%M:%S')
+   logging.basicConfig(format='%(levelname)s:%(name)s %(message)s',level=logging.ERROR,datefmt='%Y-%m-%d %H:%M:%S')
    
    app.run(host='0.0.0.0', port='3111')
    

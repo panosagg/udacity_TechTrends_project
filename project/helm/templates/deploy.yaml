@@ -24,11 +24,11 @@ spec:
         livenessProbe:
            httpGet:
             path: {{ .Values.livenessProbe.path }}
-            port: {{ .Values.containerPort }}
+            port: {{ .Values.livenessProbePort }}
         readinessProbe:
            httpGet:
             path: {{ .Values.readinessProbe.path }}
-            port: {{ .Values.containerPort }}
+            port: {{ .Values.readinessProbePort }}
         resources:
 {{ toYaml .Values.resources | indent 12 }}
             
