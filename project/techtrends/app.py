@@ -105,7 +105,7 @@ def post(post_id):
     if post is None:
       """Log message for a non-existing article"""
       app.logger.info(timestamp + 'This Article does not exist!')
-      app.logger.debug('Non-existing article debug message')
+      app.logger.debug('Non-existing Article debug message')
       return render_template('404.html'), 404
     else:
       """Log message for a non-existing article"""
@@ -140,7 +140,7 @@ def create():
             connection.commit()
             connection.close()
             app.logger.info(timestamp + 'The Article Post with title "' + str(title) + ' " was successfully created')
-            app.logger.debug('Atrical creation debug message')
+            app.logger.debug('Atricle creation debug message')
             """call function to get total ammount of db connections"""
             count_db_connections()
             return redirect(url_for('index'))
