@@ -67,6 +67,7 @@ def healthz():
     """Log message for a non-existing article"""
     time()
     app.logger.info(timestamp + '"Healthz" request successfull')
+    app.logger.debug('Healthz debug message')
     return response  
 
 @app.route('/metrics')
@@ -80,6 +81,7 @@ def metrics():
     )
     time()
     app.logger.info(timestamp + '"Metrics" request successfull')
+    app.logger.debug('Metrics debug message')
     return response 
 
     
@@ -89,6 +91,9 @@ def index():
     connection = get_db_connection()
     posts = connection.execute('SELECT * FROM posts').fetchall()
     connection.close()
+    time()
+    app.logger.info(timestamp + '"Main Page" request successfull')
+    app.logger.debug('Main Page debug message')
     return render_template('index.html', posts=posts)
 
 # Define how each individual article is rendered 
@@ -100,10 +105,12 @@ def post(post_id):
     if post is None:
       """Log message for a non-existing article"""
       app.logger.info(timestamp + 'This Article does not exist!')
+      app.logger.debug('Non-existing article debug message')
       return render_template('404.html'), 404
     else:
       """Log message for a non-existing article"""
       app.logger.info(timestamp + 'Article "' + post[2] + '" retrieved!')
+      app.logger.debug('Atricle retrieval debug message')
       """call function to get total ammount of db connections"""
       count_db_connections()
       return render_template('post.html', post=post)
@@ -113,6 +120,7 @@ def post(post_id):
 def about():
     time()
     app.logger.info(timestamp + '"About Us" page retrieved!')
+    app.logger.debug('"About Us" page retrieval debug message')
     return render_template('about.html')
 
 # Define the post creation functionality 
@@ -132,6 +140,7 @@ def create():
             connection.commit()
             connection.close()
             app.logger.info(timestamp + 'The Article Post with title "' + str(title) + ' " was successfully created')
+            app.logger.debug('Atrical creation debug message')
             """call function to get total ammount of db connections"""
             count_db_connections()
             return redirect(url_for('index'))
